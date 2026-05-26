@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="BlobIDE – Custom desktop IDE" />
+ 
+    <!-- Tauri Injects -->
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' http://localhost:8000 ws://localhost:8000 ipc: https://ipc.localhost tauri:"
+    />
+
+
+    <link
+    rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>"
+    />
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module" src="src/main.tsx"></script>
+    </body>
+</html>
