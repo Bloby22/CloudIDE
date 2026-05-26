@@ -26,10 +26,10 @@ app.add_middleware(
 )
 
 app.include_router(terminal_router, prefix="/api/terminal", tags=["terminal"])
-app.include_router(files_router,    prefix="/api/files",    tags=["files"])
-app.include_router(search_router,   prefix="/api/search",   tags=["search"])
-app.include_router(lsp_router,      prefix="/api/lsp",      tags=["lsp"])
-app.include_router(git_router,      prefix="/api/git",      tags=["git"])
+app.include_router(files_router, prefix="/api/files", tags=["files"])
+app.include_router(search_router, prefix="/api/search", tags=["search"])
+app.include_router(lsp_router, prefix="/api/lsp", tags=["lsp"])
+app.include_router(git_router, prefix="/api/git", tags=["git"])
 
 
 @app.get("/health", tags=["meta"])
