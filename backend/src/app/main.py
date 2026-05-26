@@ -1,46 +1,34 @@
-import uvicorn 
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from api.terminal import router as terminal_router
+ 
 app = FastAPI(
     title="BlobIDE",
     version="0.1.0",
-    descripton="Custom IDE"
+    description="Custom IDE backend",
 )
-
-# CORS (frontend dev server)
+ 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://localhost:5000",
+        "http://localhost:3000",
         "tauri://localhost",
     ],
-    alow_credentials=True,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# Routers
-# from api.files import router as files_router
-# from api.run import router as run_router
-# from api.search import router as search_router
-# from api.terminal import router as terminal_router
-# app.include_router(files_router, prefix="/api/files", tags=["files"])
-# app.include_router(run_router, prefix="/api/run", tags=["run"])
-# app.include_router(search_router, prefix="/api/search", tags=["search"])
-# app.include_router(terminal_router, prefix="/api/terminal", tags=["terminal"])
-
-# Health-check
+ 
+app.include_router(terminal_router, prefix="/api/terminal", tags=["terminal"])
+ 
+ 
 @app.get("/health", tags=["meta"])
 async def health() -> dict:
-    return { 
-        "status": "ok",
-        "app": "BlobIDE",
-        "version": "0.1.0"
-    }
-
-# Entry-point
+    return {"status": "ok", "app": "BlobIDE", "version": "0.1.0"}
+ 
+ 
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
@@ -49,3 +37,4 @@ if __name__ == "__main__":
         reload=True,
         log_level="info",
     )
+ 
