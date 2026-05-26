@@ -24,39 +24,6 @@ The repository is organized into a monorepo-style structure separating the prese
 
 ---
 
-## 🚀 Getting Started
-
-### Prerequisites
-* **Node.js** (v18.0 or higher recommended)
-* **Python** (v3.10 or higher recommended)
-* **Git**
-
-### 1. Frontend Setup
-Navigate to the frontend directory to install and start the web interface:
-```bash
-# Install dependencies
-npm install
-
-# Start the local development server
-npm run dev
-```
-
-### 2. Backend Setup
-Navigate to the root or backend directory to configure the Python application:
-```bash
-# Create a virtual environment (optional but recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
-
-# Install required packages (if a requirements.txt is present)
-pip install -r requirements.txt
-
-# Run the backend server
-python main.py
-```
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions to improve the IDE! Please review our [CONTRIBUTING.md](./CONTRIBUTING.md) before making any modifications. 
