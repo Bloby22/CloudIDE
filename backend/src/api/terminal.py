@@ -21,9 +21,11 @@ async def run_command(req: CommandRequest) -> CommandResponse:
         stderr=asyncio.subprocess.PIPE,
         cwd=req.cwd
     )
+
     stdout, stderr = await proc.communicate()
+
     return CommandResponse(
-        stdout=stdout.decode(errors="replace")
-        stderr=stderr.decode(errors="replace")
+        stdout=stdout.decode(errors="replace"),
+        stderr=stderr.decode(errors="replace"),
         returncode=proc.returncode or 0
     )

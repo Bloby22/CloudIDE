@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Sidebar from "./components/Sidebar"
-import EditorPane from "./components/EditorPanel"
+import EditorPane from "./components/EditorPane"
 import StatusBar from "./components/StatusBar"
 import ActivityBar from "./components/ActivityBar"
 import Terminal from "./components/Terminal"

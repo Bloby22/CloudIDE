@@ -32,7 +32,7 @@ interface Props {
 }
 
 export default function ActivityBar({
-    active, onChange, sidebarOpen, onToggleSidebar
+    activate, onChange, sidebarOpen, onToggleSidebar
 }: Props) {
     return (
     <div className="activity-bar">
@@ -41,9 +41,9 @@ export default function ActivityBar({
           <button
             key={id}
             title={label}
-            className={`activity-btn ${active === id && sidebarOpen ? "active" : ""}`}
+            className={`activity-btn ${activate === id && sidebarOpen ? "active" : ""}`}
             onClick={() => {
-              if (active === id) onToggleSidebar()
+              if (activate === id) onToggleSidebar()
               else { onChange(id); if (!sidebarOpen) onToggleSidebar() }
             }}
           >

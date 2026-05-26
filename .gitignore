@@ -1,33 +1,74 @@
-<<<<<<< HEAD
-backend/.venv
-frontend/node_modules
-.vscode/
-.github/
+# =========================
+# DEPENDENCIES
+# =========================
+node_modules/
+**/node_modules/
+
+# =========================
+# BUILD OUTPUT
+# =========================
+dist/
 build/
-=======
-# Python
-backend/.venv/
-backend/__pycache__/
-backend/src/**/__pycache__/
+out/
+coverage/
+
+# =========================
+# ENV FILES
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# PYTHON
+# =========================
+__pycache__/
 *.pyc
 *.pyo
+*.pyd
+*.sqlite3
+*.log
 
-# Node
-frontend/node_modules/
-frontend/dist/
+.venv/
+venv/
+env/
 
+# =========================
+# FASTAPI / BACKEND
+# =========================
+*.db
 
-# C++
-cpp/build/
-*.o
-*.a
-*.so
-*.dll
+# =========================
+# IDE / EDITORS
+# =========================
+.vscode/
+.idea/
 
-# VS Code
-.vscode/settings.json
-
-# OS
+# =========================
+# OS FILES
+# =========================
 .DS_Store
 Thumbs.db
->>>>>>> 9036f2e78d835ada51dff1008b6b61b2ba0235e1
+
+# =========================
+# GIT TEMP
+# =========================
+*.swp
+*.swo
+
+# =========================
+# MONACO / CACHE (optional)
+# =========================
+.monaco-cache/
+
+# =========================
+# LOGS
+# =========================
+logs/
+*.log
+
+# =========================
+# VITE / FRONTEND CACHE
+# =========================
+.vite/
+.cache/

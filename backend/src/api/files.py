@@ -4,8 +4,7 @@ from pydantic import BaseModel
 
 router = APIRouter()
 
-ROOT = Path(".").resolve()
-
+ROOT = Path(__file__).resolve().parents[3]
 
 def safe_path(path: str) -> Path:
     p = (ROOT / path).resolve()
