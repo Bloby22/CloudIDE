@@ -22,6 +22,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<string>("")
   const [terminalOpen, setTerminalOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [rootPath, setRootPath] = useState<string>("")
 
   const closeTab = (id: string) => {
     const next = tabs.filter((t) => t.id !== id)
@@ -50,10 +51,12 @@ export default function App() {
         onChange={setActivePanel}
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
+        onOpenFolder={setRootPath}
       />
       {sidebarOpen && (
         <Sidebar
           panel={activePanel}
+          rootPath={rootPath}
           onOpenFile={openFile}
         />
       )}

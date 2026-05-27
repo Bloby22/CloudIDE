@@ -106,10 +106,11 @@ function TreeItem({
 
 interface Props {
   panel: Panel
+  rootPath: string
   onOpenFile: (f: FileTab) => void
 }
 
-export default function Sidebar({ panel, onOpenFile }: Props) {
+export default function Sidebar({ panel, rootPath, onOpenFile }: Props) {
   const [tree, setTree] = useState<TreeNode | null>(null)
   const [search, setSearch] = useState("")
   const [searchResults, setSearchResults] = useState<{ file: string; line: number; text: string }[]>([])
@@ -117,18 +118,24 @@ export default function Sidebar({ panel, onOpenFile }: Props) {
 
   useEffect(() => {
     if (panel === "explorer") {
-      fetch("http://localhost:8000/api/files/tree")
+      const url = rootPath
+        ? `http://localhost:8000/api/files/tree?path=${encodeURIComponent(rootPath)}`
+        : "http://localhost:8000/api/files/tree"
+      fetch(url)
         .then((r) => r.json())
         .then(setTree)
         .catch(() => setTree(null))
     }
     if (panel === "git") {
-      fetch("http://localhost:8000/api/git/status")
+      const url = rootPath
+        ? `http://localhost:8000/api/git/status?cwd=${encodeURIComponent(rootPath)}`
+        : "http://localhost:8000/api/git/status"
+      fetch(url)
         .then((r) => r.json())
         .then((d) => setGitFiles(d.files ?? []))
         .catch(() => setGitFiles([]))
     }
-  }, [panel])
+  }, [panel, rootPath])
 
   useEffect(() => {
     if (!search.trim()) { setSearchResults([]); return }
@@ -136,26 +143,33 @@ export default function Sidebar({ panel, onOpenFile }: Props) {
       fetch("http://localhost:8000/api/search/files", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: search, max_results: 50 }),
+        body: JSON.stringify({ query: search, path: rootPath, max_results: 50 }),
       })
         .then((r) => r.json())
         .then(setSearchResults)
         .catch(() => setSearchResults([]))
     }, 300)
     return () => clearTimeout(t)
-  }, [search])
+  }, [search, rootPath])
 
   return (
     <div className="sidebar">
       {panel === "explorer" && (
         <>
-          <div className="sidebar__header">EXPLORER</div>
+          <div className="sidebar__header">
+            {rootPath
+              ? rootPath.split(/[\\/]/).pop() ?? "EXPLORER"
+              : "EXPLORER"
+            }
+          </div>
           <div className="sidebar__tree">
             {tree
               ? tree.children?.map((node) => (
                   <TreeItem key={node.path} node={node} depth={0} onOpen={onOpenFile} />
                 ))
-              : <div className="sidebar__empty">Cannot connect to backend</div>
+              : <div className="sidebar__empty">
+                  {rootPath ? "Cannot connect to backend" : "Open a folder to start"}
+                </div>
             }
           </div>
         </>
